@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 /**
  * 授权
  */
@@ -30,7 +32,7 @@ public class LoginController {
      * @return access_token
      */
     @GetMapping("/getstandalonetoken")
-    public String getStandaloneToken() {
+    public Map<String, Object> getStandaloneToken() {
         return standaloneBuilder.getWpsTokenSync(Oauth2TokenRequest.buildStandaloneTokenRequest(GrantTypes.StandaloneClient));
     }
 
@@ -43,7 +45,7 @@ public class LoginController {
      * @return null
      */
     @GetMapping("/auth")
-    public ResponseEntity<Void> Auth(@RequestParam(value = "redirect_uri", defaultValue = "http://localhost:8080/login/getusertoken") String redirectUri,
+    public ResponseEntity<Void> auth(@RequestParam(value = "redirect_uri", defaultValue = "http://localhost:8080/login/getusertoken") String redirectUri,
                                      @RequestParam("scope") String scope,
                                      @RequestParam(value = "state", required = false) String state) {
         try {
@@ -65,10 +67,11 @@ public class LoginController {
      * @param redirectUri 用于校验 code 对应的重定向地址
      * @return access_token
      */
-    @GetMapping("/getusertoken")
-    public String getUserToken(@RequestParam("code") String code,
-                               @RequestParam(value = "redirect_uri", defaultValue = "http://localhost:8080/login/getusertoken") String redirectUri) {
+    @GetMapping("/callback")
+    public Map<String, Object> callback(@RequestParam("code") String code,
+                                        @RequestParam(value = "redirect_uri", defaultValue = "http://localhost:8080/login/getusertoken") String redirectUri) {
         // 临时处理 原流程 ==> auth.redirect_uri 前端回调页面 => code,state ==> 截取路由获取token
+        // 存入redis
         return userBuilder.getWpsTokenSync(Oauth2TokenRequest.buildUserClientTokenRequest(GrantTypes.UserClient, code, redirectUri));
     }
 
@@ -78,7 +81,7 @@ public class LoginController {
      * @return access_token
      */
     @GetMapping("/refreshusertoken")
-    public String refreshUserToken(@RequestParam("refresh_token") String refreshToken)
+    public Map<String, Object> refreshUserToken(@RequestParam("refresh_token") String refreshToken)
     {
         return userBuilder.refreshTokenSync(Oauth2TokenRequest.buildRefreshUserTokenRequest(GrantTypes.RefreshClient, refreshToken));
     }

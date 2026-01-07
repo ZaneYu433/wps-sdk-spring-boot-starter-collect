@@ -4,9 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="622f05be-b305-48ef-ad33-5d62c4b1d856" name="Changes" comment="feat: Refresh UserClient AccessToken.">
+    <list default="true" id="622f05be-b305-48ef-ad33-5d62c4b1d856" name="Changes" comment="doc: Add Interface Desc.">
+      <change afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/model/DriveFreq/Items/request/DriveFreqItemsRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/CloudDocInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/impl/CloudDocClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter-test/src/main/java/net/thewesthill/wpssdkspringbootstartertest/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter-test/src/main/java/net/thewesthill/wpssdkspringbootstartertest/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/AccessTokenBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/AccessTokenBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/impl/StandaloneClientTokenBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/impl/StandaloneClientTokenBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/impl/UserClientTokenBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/impl/UserClientTokenBuilder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +69,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.WpsSdkSpringBootStarterTestApplication.executor": "Run",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
@@ -122,7 +129,7 @@
       <workItem from="1767710932821" duration="32000" />
       <workItem from="1767712823198" duration="8975000" />
       <workItem from="1767749741846" duration="8432000" />
-      <workItem from="1767758225528" duration="9577000" />
+      <workItem from="1767758225528" duration="16563000" />
     </task>
     <task id="LOCAL-00001" summary="feat: Authorization Request.">
       <option name="closed" value="true" />
@@ -148,7 +155,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767771876267</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="doc: Add Interface Desc.">
+      <option name="closed" value="true" />
+      <created>1767772944269</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1767772944269</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,6 +173,7 @@
     <MESSAGE value="feat: Authorization Request." />
     <MESSAGE value="feat: Get UserClient AccessToken." />
     <MESSAGE value="feat: Refresh UserClient AccessToken." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Refresh UserClient AccessToken." />
+    <MESSAGE value="doc: Add Interface Desc." />
+    <option name="LAST_COMMIT_MESSAGE" value="doc: Add Interface Desc." />
   </component>
 </project>

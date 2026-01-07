@@ -5,6 +5,7 @@ import net.thewesthill.wps.properties.ClientCredentialsProperties;
 import net.thewesthill.wps.service.AccessTokenBuilder;
 import net.thewesthill.wps.service.Oauth2TokenRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,8 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+
+import java.util.Map;
 
 @Service
 public class UserClientTokenBuilder implements AccessTokenBuilder {
@@ -24,7 +27,7 @@ public class UserClientTokenBuilder implements AccessTokenBuilder {
     private WebClient webClient;
 
     @Override
-    public Mono<String> getWpsTokenAsync(Oauth2TokenRequest oauth2TokenRequest) {
+    public Mono<Map<String, Object>> getWpsTokenAsync(Oauth2TokenRequest oauth2TokenRequest) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>() {{
             add("grant_type", oauth2TokenRequest.getGrantTypes().getInfo());
             add("client_id", properties.getClientId());
@@ -42,11 +45,11 @@ public class UserClientTokenBuilder implements AccessTokenBuilder {
                         status -> !status.is2xxSuccessful(),
                         response -> Mono.error(new RuntimeException("Request Error: " + response.statusCode()))
                 )
-                .bodyToMono(String.class);
+                .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {});
     }
 
     @Override
-    public String getWpsTokenSync(Oauth2TokenRequest oauth2TokenRequest) {
+    public Map<String, Object> getWpsTokenSync(Oauth2TokenRequest oauth2TokenRequest) {
         return getWpsTokenAsync(oauth2TokenRequest).block();
     }
 
@@ -73,7 +76,7 @@ public class UserClientTokenBuilder implements AccessTokenBuilder {
                 .orElseThrow(() -> new RuntimeException("Response Not Contain RedirectUrl"));
     }
 
-    public Mono<String> refreshTokenAsync(Oauth2TokenRequest oauth2TokenRequest)
+    public Mono<Map<String, Object>> refreshTokenAsync(Oauth2TokenRequest oauth2TokenRequest)
     {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>() {{
             add("grant_type", oauth2TokenRequest.getGrantTypes().getInfo());
@@ -91,10 +94,10 @@ public class UserClientTokenBuilder implements AccessTokenBuilder {
                         status -> !status.is2xxSuccessful(),
                         response -> Mono.error(new RuntimeException("Request Error: " + response.statusCode()))
                 )
-                .bodyToMono(String.class);
+                .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {});
     }
 
-    public String refreshTokenSync(Oauth2TokenRequest oauth2TokenRequest)
+    public Map<String, Object> refreshTokenSync(Oauth2TokenRequest oauth2TokenRequest)
     {
         return refreshTokenAsync(oauth2TokenRequest).block();
     }
