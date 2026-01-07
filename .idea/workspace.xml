@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="622f05be-b305-48ef-ad33-5d62c4b1d856" name="Changes" comment="" />
+    <list default="true" id="622f05be-b305-48ef-ad33-5d62c4b1d856" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/wps-sdk-spring-boot-starter-collect.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter-test/src/main/java/net/thewesthill/wpssdkspringbootstartertest/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter-test/src/main/java/net/thewesthill/wpssdkspringbootstartertest/WpsSdkSpringBootStarterTestApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter-test/src/main/java/net/thewesthill/wpssdkspringbootstartertest/WpsSdkSpringBootStarterTestApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/config/ClientCredentialsProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/properties/ClientCredentialsProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/config/RestTemplateConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/config/WebClientConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/config/WpsSdkAutoConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/config/WpsSdkAutoConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/impl/StandaloneClientTokenBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/impl/StandaloneClientTokenBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/impl/UserClientTokenBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/impl/UserClientTokenBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/resources/META-INF/spring.factories" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/resources/META-INF/spring.factories" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,8 +27,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -25,7 +38,8 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+        <option name="customMavenHome" value="D:\.env\Maven\apache-maven-3.9.12" />
+        <option name="mavenHomeTypeForPersistence" value="CUSTOM" />
         <option name="userSettingsFile" value="D:\.env\Maven\apache-maven-3.9.12\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
@@ -43,6 +57,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.WpsSdkSpringBootStarterTestApplication.executor": "Run",
     "Maven.wps-sdk-spring-boot-starter [clean].executor": "Run",
     "Maven.wps-sdk-spring-boot-starter [install].executor": "Run",
     "Maven.wps-sdk-spring-boot-starter-test [clean].executor": "Run",
@@ -53,10 +68,13 @@
     "RequestMappingsPanelWidth0": "75",
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "Spring Boot.WpsSdkSpringBootStarterTestApplication.executor": "Run",
+    "Spring Boot.WpsSdkSpringBootStarterTestApplication.executor": "Debug",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/ZaneYu/Desktop/wps-sdk-spring-boot-starter-collect",
     "nodejs_package_manager_path": "npm",
     "run.configurations.included.in.services": "true",
     "settings.editor.selected.configurable": "MavenSettings",
@@ -109,6 +127,8 @@
       <option name="presentableId" value="Default" />
       <updated>1767685498520</updated>
       <workItem from="1767685501634" duration="5384000" />
+      <workItem from="1767710932821" duration="32000" />
+      <workItem from="1767712823198" duration="8975000" />
     </task>
     <servers />
   </component>

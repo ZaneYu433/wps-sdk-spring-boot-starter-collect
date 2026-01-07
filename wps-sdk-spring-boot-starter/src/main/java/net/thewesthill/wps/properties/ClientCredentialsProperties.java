@@ -1,4 +1,4 @@
-package net.thewesthill.wps.config;
+package net.thewesthill.wps.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
