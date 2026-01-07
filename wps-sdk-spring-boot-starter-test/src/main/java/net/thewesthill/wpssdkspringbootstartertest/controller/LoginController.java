@@ -27,11 +27,17 @@ public class LoginController {
         return standaloneBuilder.getWpsTokenSync(Oauth2TokenRequest.buildStandaloneTokenRequest(GrantTypes.StandaloneClient));
     }
 
+    /**
+     * TODO 前端开发后调整
+     * @param redirectUri 使用开者后台应用配置的【用户授权回调地址】经过encode后的值
+     * @param scope 用户授权的权限，使用英文逗号分隔，如：scope1,scope2,scope3
+     * @param state 应用自定义数据，授权成功后重定向时会带出
+     * @return null
+     */
     @GetMapping("/auth")
-    public ResponseEntity<Void> Auth(@RequestParam("redirect_uri") String redirectUri,
+    public ResponseEntity<Void> Auth(@RequestParam(value = "redirect_uri", defaultValue = "http://localhost:8080/login/getusertoken") String redirectUri,
                                      @RequestParam("scope") String scope,
                                      @RequestParam(value = "state", required = false) String state) {
-
         try {
             String response = userBuilder.AuthSender(redirectUri, scope, state);
             return ResponseEntity.status(HttpStatus.FOUND)
@@ -42,5 +48,18 @@ public class LoginController {
                     .header("Location", "/error?msg=" + ex.getMessage())
                     .build();
         }
+    }
+
+    /**
+     * TODO 前端开发后调整
+     * @param code 授权链接重定向时携带的临时码
+     * @param redirectUri 用于校验 code 对应的重定向地址
+     * @return access_token
+     */
+    @GetMapping("/getusertoken")
+    public String getUserToken(@RequestParam("code") String code,
+                               @RequestParam(value = "redirect_uri", defaultValue = "http://localhost:8080/login/getusertoken") String redirectUri) {
+        // 临时处理 原流程 ==> auth.redirect_uri 前端回调页面 => code,state ==> 截取路由获取token
+        return userBuilder.getWpsTokenSync(Oauth2TokenRequest.buildUserClientTokenRequest(GrantTypes.UserClient, code, redirectUri));
     }
 }

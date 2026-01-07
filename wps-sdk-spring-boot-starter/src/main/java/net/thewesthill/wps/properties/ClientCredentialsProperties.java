@@ -15,10 +15,11 @@ public class ClientCredentialsProperties {
      */
     private String clientSecret;
 
-    public ClientCredentialsProperties() {}
+    public ClientCredentialsProperties() {
 
-    public ClientCredentialsProperties(String clientId, String clientSecret)
-    {
+    }
+
+    public ClientCredentialsProperties(String clientId, String clientSecret) {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
     }
