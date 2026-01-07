@@ -19,15 +19,13 @@ public class WpsSdkAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public UserClientTokenBuilder getUserClientTokenBuilder()
-    {
+    public UserClientTokenBuilder getUserClientTokenBuilder() {
         return new UserClientTokenBuilder();
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public StandaloneClientTokenBuilder getStandaloneClientTokenBuilder()
-    {
+    public StandaloneClientTokenBuilder getStandaloneClientTokenBuilder() {
         return new StandaloneClientTokenBuilder();
     }
 }

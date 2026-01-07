@@ -3,6 +3,7 @@ package net.thewesthill.wps.service.impl;
 import net.thewesthill.wps.properties.ClientCredentialsProperties;
 import net.thewesthill.wps.contants.UrlConstants;
 import net.thewesthill.wps.service.AccessTokenBuilder;
+import net.thewesthill.wps.service.Oauth2TokenRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -20,11 +21,12 @@ public class StandaloneClientTokenBuilder implements AccessTokenBuilder {
     @Autowired
     private WebClient webClient;
 
-    public Mono<String> getWpsTokenAsync(String grantType) {
+    @Override
+    public Mono<String> getWpsTokenAsync(Oauth2TokenRequest oauth2TokenRequest) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>() {{
-           add("grant_type", grantType);
-           add("client_id", properties.getClientId());
-           add("client_secret", properties.getClientSecret());
+            add("grant_type", oauth2TokenRequest.getGrantTypes().getInfo());
+            add("client_id", properties.getClientId());
+            add("client_secret", properties.getClientSecret());
         }};
 
         return webClient.post()
@@ -39,7 +41,8 @@ public class StandaloneClientTokenBuilder implements AccessTokenBuilder {
                 .bodyToMono(String.class);
     }
 
-    public String getWpsTokenSync(String grantType) {
-        return getWpsTokenAsync(grantType).block();
+    @Override
+    public String getWpsTokenSync(Oauth2TokenRequest oauth2TokenRequest) {
+        return getWpsTokenAsync(oauth2TokenRequest).block();
     }
 }
