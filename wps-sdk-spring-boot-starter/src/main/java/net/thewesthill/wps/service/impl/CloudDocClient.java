@@ -1,8 +1,8 @@
 package net.thewesthill.wps.service.impl;
 
-import net.thewesthill.wps.model.DriveFreq.Items.request.DriveFreqItemsRequest;
+import lombok.RequiredArgsConstructor;
+import net.thewesthill.wps.model.drive_freq.items.request.DriveFreqItemsParam;
 import net.thewesthill.wps.service.CloudDocInterface;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -10,14 +10,13 @@ import reactor.core.publisher.Mono;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class CloudDocClient implements CloudDocInterface {
 
-    @Autowired
-    private WebClient webClient;
-
+    private final WebClient webClient;
 
     @Override
-    public Mono<Map<String, Object>> GetUsedFiles(DriveFreqItemsRequest request) {
+    public Mono<Map<String, Object>> GetUsedFiles(DriveFreqItemsParam request) {
         return null;
     }
 }

@@ -5,14 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="622f05be-b305-48ef-ad33-5d62c4b1d856" name="Changes" comment="doc: Add Interface Desc.">
-      <change afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/model/DriveFreq/Items/request/DriveFreqItemsRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/CloudDocInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/impl/CloudDocClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/model/BaseResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/model/drive_freq/items/request/DriveFreqItemsParam.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/model/oauth2/token/response/StandaloneTokenClientResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/model/oauth2/token/response/UserTokenClientResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter-test/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter-test/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter-test/src/main/java/net/thewesthill/wpssdkspringbootstartertest/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter-test/src/main/java/net/thewesthill/wpssdkspringbootstartertest/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/AccessTokenBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/AccessTokenBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/impl/StandaloneClientTokenBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/impl/StandaloneClientTokenBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/impl/UserClientTokenBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/impl/UserClientTokenBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter-test/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter-test/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/config/WebClientConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/config/WebClientConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/config/WpsSdkAutoConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/config/WpsSdkAutoConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/enums/GrantTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/enums/GrantTypes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/model/DriveFreq/Items/request/DriveFreqItemsRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/properties/ClientCredentialsProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/properties/ClientCredentialsProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/AccessTokenBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/AccessTokenInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/CloudDocInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/CloudDocInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/Oauth2TokenRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/model/oauth2/token/request/Oauth2TokenParam.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/impl/CloudDocClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/impl/CloudDocClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/impl/StandaloneClientTokenBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/impl/StandaloneAccessTokenClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/impl/UserClientTokenBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/impl/UserAccessTokenClient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +47,8 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+        <option name="customMavenHome" value="D:\.env\Maven\apache-maven-3.9.12" />
+        <option name="mavenHomeTypeForPersistence" value="CUSTOM" />
         <option name="userSettingsFile" value="D:\.env\Maven\apache-maven-3.9.12\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
@@ -76,7 +90,7 @@
     "last_opened_file_path": "C:/Users/fanzhongyu/Desktop/Std/wps-sdk-spring-boot-starter-collect",
     "nodejs_package_manager_path": "npm",
     "run.configurations.included.in.services": "true",
-    "settings.editor.selected.configurable": "com.itangcent.idea.plugin.configurable.AccountConfigurable.apifox",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>

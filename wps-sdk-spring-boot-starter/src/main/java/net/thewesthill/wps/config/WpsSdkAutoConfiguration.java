@@ -1,8 +1,8 @@
 package net.thewesthill.wps.config;
 
 import net.thewesthill.wps.properties.ClientCredentialsProperties;
-import net.thewesthill.wps.service.impl.StandaloneClientTokenBuilder;
-import net.thewesthill.wps.service.impl.UserClientTokenBuilder;
+import net.thewesthill.wps.service.impl.StandaloneAccessTokenClient;
+import net.thewesthill.wps.service.impl.UserAccessTokenClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -19,13 +19,13 @@ public class WpsSdkAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public UserClientTokenBuilder getUserClientTokenBuilder() {
-        return new UserClientTokenBuilder();
+    public UserAccessTokenClient getUserClientTokenBuilder(ClientCredentialsProperties properties, WebClient webClient) {
+        return new UserAccessTokenClient(properties, webClient);
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public StandaloneClientTokenBuilder getStandaloneClientTokenBuilder() {
-        return new StandaloneClientTokenBuilder();
+    public StandaloneAccessTokenClient getStandaloneClientTokenBuilder(ClientCredentialsProperties properties, WebClient webClient) {
+        return new StandaloneAccessTokenClient(properties, webClient);
     }
 }

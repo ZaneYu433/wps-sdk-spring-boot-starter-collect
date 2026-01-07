@@ -1,31 +1,29 @@
 package net.thewesthill.wps.service.impl;
 
-import net.thewesthill.wps.properties.ClientCredentialsProperties;
+import lombok.RequiredArgsConstructor;
 import net.thewesthill.wps.contants.UrlConstants;
-import net.thewesthill.wps.service.AccessTokenBuilder;
-import net.thewesthill.wps.service.Oauth2TokenRequest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
+import net.thewesthill.wps.model.oauth2.token.response.StandaloneTokenClientResponse;
+import net.thewesthill.wps.properties.ClientCredentialsProperties;
+import net.thewesthill.wps.service.AccessTokenInterface;
+import net.thewesthill.wps.model.oauth2.token.request.Oauth2TokenParam;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.util.Map;
-
 @Service
-public class StandaloneClientTokenBuilder implements AccessTokenBuilder {
+@RequiredArgsConstructor
+public class StandaloneAccessTokenClient implements AccessTokenInterface<StandaloneTokenClientResponse> {
 
-    @Autowired
-    private ClientCredentialsProperties properties;
+    private final ClientCredentialsProperties properties;
 
-    @Autowired
-    private WebClient webClient;
+    private final WebClient webClient;
 
     @Override
-    public Mono<Map<String, Object>> getWpsTokenAsync(Oauth2TokenRequest oauth2TokenRequest) {
+    public Mono<ResponseEntity<StandaloneTokenClientResponse>> getWpsTokenAsync(Oauth2TokenParam oauth2TokenRequest) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>() {{
             add("grant_type", oauth2TokenRequest.getGrantTypes().getInfo());
             add("client_id", properties.getClientId());
@@ -41,11 +39,12 @@ public class StandaloneClientTokenBuilder implements AccessTokenBuilder {
                         status -> !status.is2xxSuccessful(),
                         response -> Mono.error(new RuntimeException("Request Error: " + response.statusCode()))
                 )
-                .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {});
+                .bodyToMono(StandaloneTokenClientResponse.class)
+                .map(ResponseEntity::ok);
     }
 
     @Override
-    public Map<String, Object> getWpsTokenSync(Oauth2TokenRequest oauth2TokenRequest) {
+    public ResponseEntity<StandaloneTokenClientResponse> getWpsTokenSync(Oauth2TokenParam oauth2TokenRequest) {
         return getWpsTokenAsync(oauth2TokenRequest).block();
     }
 }

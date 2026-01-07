@@ -1,5 +1,10 @@
 package net.thewesthill.wps.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
 public enum GrantTypes {
 
     UserClient("authorization_code"),
@@ -9,14 +14,4 @@ public enum GrantTypes {
     StandaloneClient("client_credentials");
 
     private final String info;
-
-    GrantTypes(String info)
-    {
-        this.info = info;
-    }
-
-    public String getInfo()
-    {
-        return info;
-    }
 }

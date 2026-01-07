@@ -1,7 +1,13 @@
 package net.thewesthill.wps.properties;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @ConfigurationProperties(prefix = "wps-sdk")
 public class ClientCredentialsProperties {
 
@@ -14,29 +20,4 @@ public class ClientCredentialsProperties {
      * 应用 APP KEY
      */
     private String clientSecret;
-
-    public ClientCredentialsProperties() {
-
-    }
-
-    public ClientCredentialsProperties(String clientId, String clientSecret) {
-        this.clientId = clientId;
-        this.clientSecret = clientSecret;
-    }
-
-    public String getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
-    }
-
-    public String getClientSecret() {
-        return clientSecret;
-    }
-
-    public void setClientSecret(String clientSecret) {
-        this.clientSecret = clientSecret;
-    }
 }
