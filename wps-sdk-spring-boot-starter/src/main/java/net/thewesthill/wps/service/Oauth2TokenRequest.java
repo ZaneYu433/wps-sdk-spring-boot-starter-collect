@@ -12,6 +12,8 @@ public class Oauth2TokenRequest {
 
     private String redirectUri;
 
+    private String refreshToken;
+
     private Oauth2TokenRequest() {}
 
     private Oauth2TokenRequest(GrantTypes grantTypes)
@@ -25,6 +27,12 @@ public class Oauth2TokenRequest {
         this.redirectUri = redirectUri;
     }
 
+    private Oauth2TokenRequest(GrantTypes grantTypes, String refreshToken)
+    {
+        this.grantTypes = grantTypes;
+        this.refreshToken = refreshToken;
+    }
+
     public static Oauth2TokenRequest buildUserClientTokenRequest(GrantTypes grantTypes, String code, String redirectUri)
     {
         return new Oauth2TokenRequest(grantTypes, code, redirectUri);
@@ -33,6 +41,11 @@ public class Oauth2TokenRequest {
     public static Oauth2TokenRequest buildStandaloneTokenRequest(GrantTypes grantTypes)
     {
         return new Oauth2TokenRequest(grantTypes);
+    }
+
+    public static Oauth2TokenRequest buildRefreshUserTokenRequest(GrantTypes grantTypes, String refreshToken)
+    {
+        return new Oauth2TokenRequest(grantTypes, refreshToken);
     }
 
     public String getUserClientRequestInfo()
@@ -62,5 +75,14 @@ public class Oauth2TokenRequest {
 
     public void setRedirectUri(String redirectUri) {
         this.redirectUri = redirectUri;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken)
+    {
+        this.refreshToken = refreshToken;
     }
 }

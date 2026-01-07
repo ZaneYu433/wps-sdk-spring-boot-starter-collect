@@ -39,7 +39,7 @@ public class LoginController {
                                      @RequestParam("scope") String scope,
                                      @RequestParam(value = "state", required = false) String state) {
         try {
-            String response = userBuilder.AuthSender(redirectUri, scope, state);
+            String response = userBuilder.authSender(redirectUri, scope, state);
             return ResponseEntity.status(HttpStatus.FOUND)
                     .header("Location", response)
                     .build();
@@ -62,4 +62,11 @@ public class LoginController {
         // 临时处理 原流程 ==> auth.redirect_uri 前端回调页面 => code,state ==> 截取路由获取token
         return userBuilder.getWpsTokenSync(Oauth2TokenRequest.buildUserClientTokenRequest(GrantTypes.UserClient, code, redirectUri));
     }
+
+    @GetMapping("/refreshusertoken")
+    public String refreshUserToken(@RequestParam("refresh_token") String refreshToken)
+    {
+        return userBuilder.refreshTokenSync(Oauth2TokenRequest.buildRefreshUserTokenRequest(GrantTypes.RefreshClient, refreshToken));
+    }
+
 }

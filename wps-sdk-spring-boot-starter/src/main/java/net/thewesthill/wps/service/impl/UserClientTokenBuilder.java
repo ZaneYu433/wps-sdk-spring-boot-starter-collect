@@ -50,7 +50,7 @@ public class UserClientTokenBuilder implements AccessTokenBuilder {
         return getWpsTokenAsync(oauth2TokenRequest).block();
     }
 
-    public String AuthSender(String redirectUri, String scope, String state) {
+    public String authSender(String redirectUri, String scope, String state) {
         ClientResponse response = webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path(UrlConstants.OAUTH2_AUTH_URL)
@@ -71,5 +71,31 @@ public class UserClientTokenBuilder implements AccessTokenBuilder {
                 .stream()
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Response Not Contain RedirectUrl"));
+    }
+
+    public Mono<String> refreshTokenAsync(Oauth2TokenRequest oauth2TokenRequest)
+    {
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>() {{
+            add("grant_type", oauth2TokenRequest.getGrantTypes().getInfo());
+            add("refresh_token", oauth2TokenRequest.getRefreshToken());
+            add("client_id", properties.getClientId());
+            add("client_secret", properties.getClientSecret());
+        }};
+
+        return webClient.post()
+                .uri(UrlConstants.WPS_TOKEN_URL)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .bodyValue(params)
+                .retrieve()
+                .onStatus(
+                        status -> !status.is2xxSuccessful(),
+                        response -> Mono.error(new RuntimeException("Request Error: " + response.statusCode()))
+                )
+                .bodyToMono(String.class);
+    }
+
+    public String refreshTokenSync(Oauth2TokenRequest oauth2TokenRequest)
+    {
+        return refreshTokenAsync(oauth2TokenRequest).block();
     }
 }
