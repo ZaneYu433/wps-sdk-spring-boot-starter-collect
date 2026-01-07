@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="622f05be-b305-48ef-ad33-5d62c4b1d856" name="Changes" comment="feat: Get UserClient AccessToken.">
+    <list default="true" id="622f05be-b305-48ef-ad33-5d62c4b1d856" name="Changes" comment="feat: Refresh UserClient AccessToken.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter-test/src/main/java/net/thewesthill/wpssdkspringbootstartertest/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter-test/src/main/java/net/thewesthill/wpssdkspringbootstartertest/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/Oauth2TokenRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/Oauth2TokenRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/impl/UserClientTokenBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/wps-sdk-spring-boot-starter/src/main/java/net/thewesthill/wps/service/impl/UserClientTokenBuilder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +36,9 @@
   <component name="MavenRunner">
     <option name="skipTests" value="true" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -46,32 +47,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.WpsSdkSpringBootStarterTestApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.wps-sdk-spring-boot-starter [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.wps-sdk-spring-boot-starter [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.wps-sdk-spring-boot-starter-test [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.wps-sdk-spring-boot-starter-test [install].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;Spring Boot.WpsSdkSpringBootStarterTestApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/fanzhongyu/Desktop/Std/wps-sdk-spring-boot-starter-collect&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.WpsSdkSpringBootStarterTestApplication.executor": "Run",
+    "Maven.wps-sdk-spring-boot-starter [clean].executor": "Run",
+    "Maven.wps-sdk-spring-boot-starter [install].executor": "Run",
+    "Maven.wps-sdk-spring-boot-starter-test [clean].executor": "Run",
+    "Maven.wps-sdk-spring-boot-starter-test [install].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "Spring Boot.WpsSdkSpringBootStarterTestApplication.executor": "Run",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/fanzhongyu/Desktop/Std/wps-sdk-spring-boot-starter-collect",
+    "nodejs_package_manager_path": "npm",
+    "run.configurations.included.in.services": "true",
+    "settings.editor.selected.configurable": "com.itangcent.idea.plugin.configurable.AccountConfigurable.apifox",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
@@ -121,7 +122,7 @@
       <workItem from="1767710932821" duration="32000" />
       <workItem from="1767712823198" duration="8975000" />
       <workItem from="1767749741846" duration="8432000" />
-      <workItem from="1767758225528" duration="8305000" />
+      <workItem from="1767758225528" duration="9577000" />
     </task>
     <task id="LOCAL-00001" summary="feat: Authorization Request.">
       <option name="closed" value="true" />
@@ -139,7 +140,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767768639017</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feat: Refresh UserClient AccessToken.">
+      <option name="closed" value="true" />
+      <created>1767771876267</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1767771876267</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,6 +157,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: Authorization Request." />
     <MESSAGE value="feat: Get UserClient AccessToken." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Get UserClient AccessToken." />
+    <MESSAGE value="feat: Refresh UserClient AccessToken." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Refresh UserClient AccessToken." />
   </component>
 </project>

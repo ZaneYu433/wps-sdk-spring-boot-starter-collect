@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 授权
+ */
 @RestController
 @RequestMapping("/login")
 public class LoginController {
@@ -22,12 +25,17 @@ public class LoginController {
     @Autowired
     private UserClientTokenBuilder userBuilder;
 
+    /**
+     * 获取自建应用 access_token
+     * @return access_token
+     */
     @GetMapping("/getstandalonetoken")
     public String getStandaloneToken() {
         return standaloneBuilder.getWpsTokenSync(Oauth2TokenRequest.buildStandaloneTokenRequest(GrantTypes.StandaloneClient));
     }
 
     /**
+     * 授权链接
      * TODO 前端开发后调整
      * @param redirectUri 使用开者后台应用配置的【用户授权回调地址】经过encode后的值
      * @param scope 用户授权的权限，使用英文逗号分隔，如：scope1,scope2,scope3
@@ -51,6 +59,7 @@ public class LoginController {
     }
 
     /**
+     * 获取用户 access_token
      * TODO 前端开发后调整
      * @param code 授权链接重定向时携带的临时码
      * @param redirectUri 用于校验 code 对应的重定向地址
@@ -63,6 +72,11 @@ public class LoginController {
         return userBuilder.getWpsTokenSync(Oauth2TokenRequest.buildUserClientTokenRequest(GrantTypes.UserClient, code, redirectUri));
     }
 
+    /**
+     * 刷新用户 access_token
+     * @param refreshToken refresh_token 的值
+     * @return access_token
+     */
     @GetMapping("/refreshusertoken")
     public String refreshUserToken(@RequestParam("refresh_token") String refreshToken)
     {
