@@ -2,9 +2,9 @@ package net.thewesthill.wpssdkspringbootstartertest.controller;
 
 import lombok.RequiredArgsConstructor;
 import net.thewesthill.wps.enums.GrantTypes;
+import net.thewesthill.wps.model.oauth2.token.request.Oauth2TokenParam;
 import net.thewesthill.wps.model.oauth2.token.response.StandaloneTokenClientResponse;
 import net.thewesthill.wps.model.oauth2.token.response.UserTokenClientResponse;
-import net.thewesthill.wps.model.oauth2.token.request.Oauth2TokenParam;
 import net.thewesthill.wps.service.impl.StandaloneAccessTokenClient;
 import net.thewesthill.wps.service.impl.UserAccessTokenClient;
 import org.springframework.http.HttpStatus;

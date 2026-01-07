@@ -2,10 +2,10 @@ package net.thewesthill.wps.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import net.thewesthill.wps.contants.UrlConstants;
+import net.thewesthill.wps.model.oauth2.token.request.Oauth2TokenParam;
 import net.thewesthill.wps.model.oauth2.token.response.UserTokenClientResponse;
 import net.thewesthill.wps.properties.ClientCredentialsProperties;
 import net.thewesthill.wps.service.AccessTokenInterface;
-import net.thewesthill.wps.model.oauth2.token.request.Oauth2TokenParam;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

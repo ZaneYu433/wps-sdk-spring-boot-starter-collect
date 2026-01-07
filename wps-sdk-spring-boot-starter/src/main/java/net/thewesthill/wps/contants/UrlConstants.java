@@ -11,4 +11,9 @@ public interface UrlConstants {
      * 授权跳转链接
      */
     String OAUTH2_AUTH_URL = "/oauth2/auth";
+
+    /**
+     * 获取常用文档列表
+     */
+    String DRIVE_FREQ_ITEMS_URL = "/v7/drive_freq/items";
 }
