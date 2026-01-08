@@ -1,5 +1,6 @@
 package net.thewesthill.wps.model.oauth2.token.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,8 +15,10 @@ public class Oauth2TokenParam {
 
     private String code;
 
+    @JsonProperty("redirect_uri")
     private String redirectUri;
 
+    @JsonProperty("refresh_token")
     private String refreshToken;
 
     private Oauth2TokenParam(GrantTypes grantTypes) {

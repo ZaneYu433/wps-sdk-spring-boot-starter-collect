@@ -9,6 +9,7 @@ import reactor.core.publisher.Mono;
 
 @Validated
 public interface AccessTokenInterface<T extends BaseResponse> {
+
     Mono<ResponseEntity<T>> getWpsTokenAsync(@Valid Oauth2TokenParam oauth2TokenRequest);
 
     ResponseEntity<T> getWpsTokenSync(@Valid Oauth2TokenParam oauth2TokenRequest);
