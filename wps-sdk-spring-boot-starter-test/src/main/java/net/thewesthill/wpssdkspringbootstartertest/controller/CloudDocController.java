@@ -1,19 +1,13 @@
 package net.thewesthill.wpssdkspringbootstartertest.controller;
 
 import lombok.RequiredArgsConstructor;
-import net.thewesthill.wps.model.drive_freq.items.request.DriveFreqItemsParam;
-import net.thewesthill.wps.model.drive_freq.items.response.DriveFreqItemsResponse;
 import net.thewesthill.wps.service.impl.CloudDocClient;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-/**
- * 云文档
- */
+import java.util.Map;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/doc")
@@ -21,19 +15,18 @@ public class CloudDocController {
 
     private final CloudDocClient client;
 
-    /**
-     * 获取常用列表
-     *
-     * @param token 授权 token
-     * @param param with_permission with_link page_size page_token
-     * @return
-     */
-    @GetMapping("/getusedfiles")
-    public ResponseEntity<DriveFreqItemsResponse> getUsedFiles(@RequestHeader(value = "Authorization") String token,
-                                                               DriveFreqItemsParam param) {
+    @GetMapping("/drive-freq-items")
+    public ResponseEntity<Map<String, Object>> getUsedFiles(@RequestHeader(value = "Authorization") String token,
+                                                            @RequestParam(value = "X-Kso-Id-Type", required = false) String type,
+                                                            @RequestParam(value = "with_permission", required = false) String withPermission,
+                                                            @RequestParam(value = "with_link", required = false) String withLink,
+                                                            @RequestParam(value = "page_size", defaultValue = "1") String pageSize,
+                                                            @RequestParam(value = "page_token", required = false) String pageToken) {
         HttpHeaders requestHeaders = new HttpHeaders() {{
             add("Authorization", token);
+            add("X-Kso-Id-Type", type);
         }};
-        return client.GetUsedFilesSync(requestHeaders, param);
+        return client.GetUsedFilesSync(requestHeaders, withPermission, withLink, pageSize, pageToken);
     }
+
 }

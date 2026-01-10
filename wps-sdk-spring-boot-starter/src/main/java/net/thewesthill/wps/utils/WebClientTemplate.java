@@ -1,0 +1,81 @@
+package net.thewesthill.wps.utils;
+
+import lombok.RequiredArgsConstructor;
+import net.thewesthill.wps.WpsApiException;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.reactive.function.client.ClientResponse;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.util.UriBuilder;
+import reactor.core.publisher.Mono;
+
+import java.util.Map;
+import java.util.Optional;
+
+@Component
+@RequiredArgsConstructor
+public class WebClientTemplate {
+
+    private final WebClient webClient;
+
+    public Mono<? extends Throwable> handleNon2xxResponse(HttpStatusCode statusCode) {
+        return Mono.error(new WpsApiException("WebClient Request Failed, Status Code: " + statusCode));
+    }
+
+    public Mono<ResponseEntity<Map<String, Object>>> handleHeaderResponse(String message) {
+        return Mono.error(new WpsApiException("Request header 'Authorization' (token) is required"));
+    }
+
+    public <T> Mono<T> postFormAsync(String uri, MultiValueMap<String, String> formParams, HttpHeaders headers, ParameterizedTypeReference<T> responseType) {
+        return webClient.post().uri(uri).contentType(MediaType.APPLICATION_FORM_URLENCODED).bodyValue(formParams).headers(httpHeaders -> {
+            if (headers != null) {
+                httpHeaders.addAll(headers);
+            }
+        }).retrieve().onStatus(status -> !status.is2xxSuccessful(), clientResponse -> handleNon2xxResponse(clientResponse.statusCode())).bodyToMono(responseType);
+    }
+
+    public <T> Mono<ResponseEntity<T>> postFormWithResponseEntityAsync(String uri, MultiValueMap<String, String> formParams, HttpHeaders headers, ParameterizedTypeReference<T> responseType) {
+        return this.postFormAsync(uri, formParams, headers, responseType).map(ResponseEntity::ok);
+    }
+
+    private WebClient.RequestHeadersSpec<?> buildGetSpec(String uri, MultiValueMap<String, Object> params) {
+        return webClient.get().uri(uriBuilder -> {
+            UriBuilder b1 = uriBuilder.path(uri);
+            params.forEach((k, v) -> {
+                b1.queryParamIfPresent(k, Optional.of(v));
+            });
+            return b1.build();
+        });
+    }
+
+    public Mono<ClientResponse> GetClientResponse(String uri, MultiValueMap<String, Object> params) {
+        return buildGetSpec(uri, params).exchangeToMono(Mono::just);
+    }
+
+    public <T> Mono<T> getAsync(String uri, MultiValueMap<String, Object> params, HttpHeaders headers, ParameterizedTypeReference<T> responseType) {
+        return buildGetSpec(uri, params).headers(httpHeaders -> {
+            if (headers != null) {
+                httpHeaders.addAll(headers);
+            }
+        }).retrieve().onStatus(status -> !status.is2xxSuccessful(), clientResponse -> handleNon2xxResponse(clientResponse.statusCode())).bodyToMono(responseType);
+    }
+
+    public <T> Mono<ResponseEntity<T>> getWithResponseEntityAsync(String uri, MultiValueMap<String, Object> params, HttpHeaders headers, ParameterizedTypeReference<T> responseType) {
+        return this.getAsync(uri, params, headers, responseType).map(ResponseEntity::ok);
+    }
+
+    public <T> T syncExecute(Mono<T> mono) {
+        return mono.block();
+    }
+
+    public ParameterizedTypeReference<Map<String, Object>> getMapTypeReference() {
+        return new ParameterizedTypeReference<>() {
+        };
+    }
+
+}

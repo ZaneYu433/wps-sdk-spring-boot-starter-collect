@@ -1,4 +1,4 @@
-package net.thewesthill.wps.model.oauth2.token.request;
+package net.thewesthill.wps.service;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;

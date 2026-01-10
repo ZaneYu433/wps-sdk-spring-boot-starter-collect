@@ -1,9 +1,10 @@
-package net.thewesthill.wps.config;
+package net.thewesthill.wps.configs;
 
 import net.thewesthill.wps.properties.ClientCredentialsProperties;
 import net.thewesthill.wps.service.impl.CloudDocClient;
 import net.thewesthill.wps.service.impl.StandaloneAccessTokenClient;
 import net.thewesthill.wps.service.impl.UserAccessTokenClient;
+import net.thewesthill.wps.utils.WebClientTemplate;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -14,25 +15,25 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 @ConditionalOnClass(WebClient.class)
-@Import(WebClientConfiguration.class)
+@Import({WebClientConfiguration.class, WebClientTemplate.class})
 @EnableConfigurationProperties(value = ClientCredentialsProperties.class)
 public class WpsSdkAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public UserAccessTokenClient getUserClientTokenBuilder(ClientCredentialsProperties properties, WebClient webClient) {
-        return new UserAccessTokenClient(properties, webClient);
+    public UserAccessTokenClient getUserClientTokenBuilder(ClientCredentialsProperties properties, WebClientTemplate template) {
+        return new UserAccessTokenClient(properties, template);
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public StandaloneAccessTokenClient getStandaloneClientTokenBuilder(ClientCredentialsProperties properties, WebClient webClient) {
-        return new StandaloneAccessTokenClient(properties, webClient);
+    public StandaloneAccessTokenClient getStandaloneClientTokenBuilder(ClientCredentialsProperties properties, WebClientTemplate template) {
+        return new StandaloneAccessTokenClient(properties, template);
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public CloudDocClient getCloudDocClient(WebClient webClient) {
-        return new CloudDocClient(webClient);
+    public CloudDocClient getCloudDocClient(WebClient webClient, WebClientTemplate template) {
+        return new CloudDocClient(template);
     }
 }

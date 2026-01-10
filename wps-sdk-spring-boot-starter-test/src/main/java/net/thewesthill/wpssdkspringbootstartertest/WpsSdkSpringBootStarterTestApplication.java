@@ -1,6 +1,6 @@
 package net.thewesthill.wpssdkspringbootstartertest;
 
-import net.thewesthill.wps.annotation.EnableWpsServe;
+import net.thewesthill.wps.annotations.EnableWpsServe;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

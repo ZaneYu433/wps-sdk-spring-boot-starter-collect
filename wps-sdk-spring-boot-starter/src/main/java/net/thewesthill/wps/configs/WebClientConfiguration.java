@@ -1,4 +1,4 @@
-package net.thewesthill.wps.config;
+package net.thewesthill.wps.configs;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -18,3 +18,4 @@ public class WebClientConfiguration {
                 .build();
     }
 }
+
