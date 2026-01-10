@@ -17,5 +17,6 @@ public class WebClientConfiguration {
                 .baseUrl("https://openapi.wps.cn")
                 .build();
     }
+
 }
 

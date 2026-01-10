@@ -1,11 +1,11 @@
 package net.thewesthill.wps.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import net.thewesthill.wps.Components.WebClientTemplate;
 import net.thewesthill.wps.contants.UrlConstants;
 import net.thewesthill.wps.properties.ClientCredentialsProperties;
 import net.thewesthill.wps.service.AccessTokenInterface;
 import net.thewesthill.wps.service.Oauth2TokenParam;
-import net.thewesthill.wps.utils.WebClientTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -40,4 +40,5 @@ public class StandaloneAccessTokenClient implements AccessTokenInterface {
     public ResponseEntity<Map<String, Object>> getWpsTokenSync(Oauth2TokenParam oauth2TokenRequest) {
         return webClientTemplate.syncExecute(getWpsTokenAsync(oauth2TokenRequest));
     }
+
 }

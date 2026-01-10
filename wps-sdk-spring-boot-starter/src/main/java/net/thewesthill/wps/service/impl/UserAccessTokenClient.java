@@ -1,11 +1,11 @@
 package net.thewesthill.wps.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import net.thewesthill.wps.Components.WebClientTemplate;
 import net.thewesthill.wps.contants.UrlConstants;
 import net.thewesthill.wps.properties.ClientCredentialsProperties;
 import net.thewesthill.wps.service.AccessTokenInterface;
 import net.thewesthill.wps.service.Oauth2TokenParam;
-import net.thewesthill.wps.utils.WebClientTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -44,7 +44,7 @@ public class UserAccessTokenClient implements AccessTokenInterface {
 
     public String authSender(String redirectUri, String scope, String state) {
 
-        ClientResponse response = webClientTemplate.syncExecute(webClientTemplate.GetClientResponse(UrlConstants.OAUTH2_AUTH_URL, new LinkedMultiValueMap<>() {
+        ClientResponse response = webClientTemplate.syncExecute(webClientTemplate.getClientResponse(UrlConstants.OAUTH2_AUTH_URL, new LinkedMultiValueMap<>() {
             {
                 add("client_id", properties.getClientId());
                 add("response_type", "code");

@@ -14,4 +14,5 @@ public enum GrantTypes {
     StandaloneClient("client_credentials");
 
     private final String info;
+
 }

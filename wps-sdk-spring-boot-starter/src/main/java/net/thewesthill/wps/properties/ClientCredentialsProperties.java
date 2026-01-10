@@ -20,4 +20,5 @@ public class ClientCredentialsProperties {
      * 应用 APP KEY
      */
     private String clientSecret;
+
 }

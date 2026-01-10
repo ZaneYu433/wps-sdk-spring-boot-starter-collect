@@ -1,4 +1,4 @@
-package net.thewesthill.wps.utils;
+package net.thewesthill.wps.Components;
 
 import lombok.RequiredArgsConstructor;
 import net.thewesthill.wps.WpsApiException;
@@ -28,7 +28,7 @@ public class WebClientTemplate {
     }
 
     public Mono<ResponseEntity<Map<String, Object>>> handleHeaderResponse(String message) {
-        return Mono.error(new WpsApiException("Request header 'Authorization' (token) is required"));
+        return Mono.error(new WpsApiException(message));
     }
 
     public <T> Mono<T> postFormAsync(String uri, MultiValueMap<String, String> formParams, HttpHeaders headers, ParameterizedTypeReference<T> responseType) {
@@ -46,14 +46,12 @@ public class WebClientTemplate {
     private WebClient.RequestHeadersSpec<?> buildGetSpec(String uri, MultiValueMap<String, Object> params) {
         return webClient.get().uri(uriBuilder -> {
             UriBuilder b1 = uriBuilder.path(uri);
-            params.forEach((k, v) -> {
-                b1.queryParamIfPresent(k, Optional.of(v));
-            });
+            params.forEach((k, v) -> b1.queryParamIfPresent(k, Optional.of(v)));
             return b1.build();
         });
     }
 
-    public Mono<ClientResponse> GetClientResponse(String uri, MultiValueMap<String, Object> params) {
+    public Mono<ClientResponse> getClientResponse(String uri, MultiValueMap<String, Object> params) {
         return buildGetSpec(uri, params).exchangeToMono(Mono::just);
     }
 

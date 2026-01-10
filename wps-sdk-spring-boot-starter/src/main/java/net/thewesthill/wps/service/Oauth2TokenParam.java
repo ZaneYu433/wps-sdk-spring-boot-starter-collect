@@ -47,4 +47,5 @@ public class Oauth2TokenParam {
     public static Oauth2TokenParam buildRefreshUserTokenRequest(GrantTypes grantTypes, String refreshToken) {
         return new Oauth2TokenParam(grantTypes, refreshToken);
     }
+
 }

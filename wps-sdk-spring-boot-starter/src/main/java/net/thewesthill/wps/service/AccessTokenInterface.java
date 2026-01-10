@@ -13,4 +13,5 @@ public interface AccessTokenInterface {
     Mono<ResponseEntity<Map<String, Object>>> getWpsTokenAsync(@Valid Oauth2TokenParam oauth2TokenRequest);
 
     ResponseEntity<Map<String, Object>> getWpsTokenSync(@Valid Oauth2TokenParam oauth2TokenRequest);
+
 }
