@@ -1,7 +1,7 @@
 package net.thewesthill.wps.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import net.thewesthill.wps.Components.WebClientTemplate;
+import net.thewesthill.wps.components.WebClientTemplate;
 import net.thewesthill.wps.contants.UrlConstants;
 import net.thewesthill.wps.properties.ClientCredentialsProperties;
 import net.thewesthill.wps.service.AccessTokenInterface;

@@ -1,4 +1,4 @@
-package net.thewesthill.wps.Components;
+package net.thewesthill.wps.components;
 
 import lombok.RequiredArgsConstructor;
 import net.thewesthill.wps.WpsApiException;
@@ -31,7 +31,7 @@ public class WebClientTemplate {
         return Mono.error(new WpsApiException(message));
     }
 
-    public <T> Mono<T> postFormAsync(String uri, MultiValueMap<String, String> formParams, HttpHeaders headers, ParameterizedTypeReference<T> responseType) {
+    public <T> Mono<T> postFormAsync(String uri, Object formParams, HttpHeaders headers, ParameterizedTypeReference<T> responseType) {
         return webClient.post().uri(uri).contentType(MediaType.APPLICATION_FORM_URLENCODED).bodyValue(formParams).headers(httpHeaders -> {
             if (headers != null) {
                 httpHeaders.addAll(headers);
@@ -39,7 +39,7 @@ public class WebClientTemplate {
         }).retrieve().onStatus(status -> !status.is2xxSuccessful(), clientResponse -> handleNon2xxResponse(clientResponse.statusCode())).bodyToMono(responseType);
     }
 
-    public <T> Mono<ResponseEntity<T>> postFormWithResponseEntityAsync(String uri, MultiValueMap<String, String> formParams, HttpHeaders headers, ParameterizedTypeReference<T> responseType) {
+    public <T> Mono<ResponseEntity<T>> postFormWithResponseEntityAsync(String uri, Object formParams, HttpHeaders headers, ParameterizedTypeReference<T> responseType) {
         return this.postFormAsync(uri, formParams, headers, responseType).map(ResponseEntity::ok);
     }
 

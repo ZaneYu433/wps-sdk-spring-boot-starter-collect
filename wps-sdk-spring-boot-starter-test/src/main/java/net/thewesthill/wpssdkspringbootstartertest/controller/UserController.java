@@ -20,7 +20,7 @@ public class UserController {
 
     private final UserClient client;
 
-    @GetMapping("/current")
+    @GetMapping("/user/current")
     public ResponseEntity<Map<String, Object>> getUserInfo(@RequestHeader("Authorization") String token) throws NoSuchAlgorithmException, InvalidKeyException {
         return client.getUserInfoSync(new HttpHeaders() {
             {

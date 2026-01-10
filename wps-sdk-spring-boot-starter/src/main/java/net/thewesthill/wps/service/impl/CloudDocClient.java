@@ -2,9 +2,11 @@ package net.thewesthill.wps.service.impl;
 
 import io.netty.util.internal.StringUtil;
 import lombok.RequiredArgsConstructor;
-import net.thewesthill.wps.Components.WebClientTemplate;
+import net.thewesthill.wps.components.WebClientTemplate;
 import net.thewesthill.wps.contants.UrlConstants;
+import net.thewesthill.wps.model.DocLibsRequest;
 import net.thewesthill.wps.service.CloudDocInterface;
+import net.thewesthill.wps.utils.CommonUtil;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -34,18 +36,11 @@ public class CloudDocClient implements CloudDocInterface {
         return webClientTemplate.syncExecute(getUsedFilesAsync(headers, withPermission, withLink, pageSize, pageToken));
     }
 
-    public Mono<ResponseEntity<Map<String, Object>>> getDocLibsASync(HttpHeaders headers, Integer pageSize, String pageToken, String[] userRole) {
-        return webClientTemplate.getWithResponseEntityAsync(UrlConstants.DOC_LIBS_URL, new LinkedMultiValueMap<>() {{
-            add("page_size", pageSize);
-            if (!StringUtil.isNullOrEmpty(pageToken)) add("page_token", pageToken);
-            if (userRole != null && userRole.length != 0) {
-                String userRoles = String.join(",", userRole);
-                add("user_role", userRoles);
-            }
-        }}, headers, webClientTemplate.getMapTypeReference());
+    public Mono<ResponseEntity<Map<String, Object>>> getDocLibsASync(HttpHeaders headers, DocLibsRequest request) {
+        return webClientTemplate.getWithResponseEntityAsync(UrlConstants.DOC_LIBS_URL, CommonUtil.pojoCover(request), headers, webClientTemplate.getMapTypeReference());
     }
 
-    public ResponseEntity<Map<String, Object>> getDocLibsSync(HttpHeaders headers, Integer pageSize, String pageToken, String[] userRole) {
-        return webClientTemplate.syncExecute(getDocLibsASync(headers, pageSize, pageToken, userRole));
+    public ResponseEntity<Map<String, Object>> getDocLibsSync(HttpHeaders headers, DocLibsRequest request) {
+        return webClientTemplate.syncExecute(getDocLibsASync(headers, request));
     }
 }

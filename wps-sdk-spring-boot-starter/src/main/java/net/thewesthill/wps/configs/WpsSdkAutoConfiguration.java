@@ -1,6 +1,6 @@
 package net.thewesthill.wps.configs;
 
-import net.thewesthill.wps.Components.WebClientTemplate;
+import net.thewesthill.wps.components.WebClientTemplate;
 import net.thewesthill.wps.properties.ClientCredentialsProperties;
 import net.thewesthill.wps.service.UserClient;
 import net.thewesthill.wps.service.impl.CloudDocClient;

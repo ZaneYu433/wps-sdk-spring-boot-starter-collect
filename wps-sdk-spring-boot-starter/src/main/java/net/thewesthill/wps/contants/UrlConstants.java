@@ -22,5 +22,8 @@ public interface UrlConstants {
      */
     String USER_CURRENT_URL = "/v7/users/current";
 
+    /**
+     * 获取团队文档库列表
+     */
     String DOC_LIBS_URL = "/v7/doclibs";
 }
