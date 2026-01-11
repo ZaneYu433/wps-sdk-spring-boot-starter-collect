@@ -65,4 +65,9 @@ public class CloudDocController {
         }};
         return client.postDrivesFileRequestUploadSync(requestHeader, driveId, parentId, request);
     }
+
+    @PutMapping("/to-object")
+    public ResponseEntity<Map<String, Object>> postToObject(@RequestHeader(value = "Authorization") String token) {
+        return ResponseEntity.ok(null);
+    }
 }
