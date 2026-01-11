@@ -34,7 +34,7 @@ public class UserAccessTokenClient implements AccessTokenInterface {
             add("redirect_uri", oauth2TokenRequest.getRedirectUri());
         }};
 
-        return webClientTemplate.postFormWithResponseEntityAsync(UrlConstants.WPS_TOKEN_URL, params, null, webClientTemplate.getMapTypeReference());
+        return webClientTemplate.postWithResponseEntityAsync(UrlConstants.WPS_TOKEN_URL, params, null, webClientTemplate.getMapTypeReference());
     }
 
     @Override
@@ -42,7 +42,7 @@ public class UserAccessTokenClient implements AccessTokenInterface {
         return webClientTemplate.syncExecute(getWpsTokenAsync(oauth2TokenRequest));
     }
 
-    public String authSender(String redirectUri, String scope, String state) {
+    public String getOauth2AuthSync(String redirectUri, String scope, String state) {
 
         ClientResponse response = webClientTemplate.syncExecute(webClientTemplate.getClientResponse(UrlConstants.OAUTH2_AUTH_URL, new LinkedMultiValueMap<>() {
             {
@@ -69,7 +69,7 @@ public class UserAccessTokenClient implements AccessTokenInterface {
             add("client_secret", properties.getClientSecret());
         }};
 
-        return webClientTemplate.postFormWithResponseEntityAsync(UrlConstants.WPS_TOKEN_URL, params, null, webClientTemplate.getMapTypeReference());
+        return webClientTemplate.postWithResponseEntityAsync(UrlConstants.WPS_TOKEN_URL, params, null, webClientTemplate.getMapTypeReference());
     }
 
     public ResponseEntity<Map<String, Object>> refreshTokenSync(Oauth2TokenParam oauth2TokenRequest) {

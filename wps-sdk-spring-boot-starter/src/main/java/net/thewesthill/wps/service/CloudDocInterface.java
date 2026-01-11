@@ -1,16 +1,31 @@
 package net.thewesthill.wps.service;
 
-import jakarta.validation.Valid;
+import net.thewesthill.wps.model.doclibs.DocLibsRequest;
+import net.thewesthill.wps.model.drive_freq.items.DriveFreqItemsRequest;
+import net.thewesthill.wps.model.drivers.files.children.request.DriversFilesChildrenRequest;
+import net.thewesthill.wps.model.drives.files.request_upload.DrivesFilesRequestUploadRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;
 
-@Validated
 public interface CloudDocInterface {
 
-    Mono<ResponseEntity<Map<String, Object>>> getUsedFilesAsync(@Valid HttpHeaders headers, String withPermission, String withLink, String pageSize, String pageToken);
+    ResponseEntity<Map<String, Object>> getDriveFreqItemsSync(HttpHeaders requestHeader, DriveFreqItemsRequest request);
+
+    ResponseEntity<Map<String, Object>> getDocLibsSync(HttpHeaders requestHeader, DocLibsRequest request);
+
+    ResponseEntity<Map<String, Object>> getDrivesFilesChildrenSync(HttpHeaders requestHeader, String driveId, String parentId, DriversFilesChildrenRequest request);
+
+    ResponseEntity<Map<String, Object>> postDrivesFileRequestUploadSync(HttpHeaders requestHeader, String driveId, String parentId, DrivesFilesRequestUploadRequest request);
+
+    Mono<ResponseEntity<Map<String, Object>>> getDriveFreqItemsAsync(HttpHeaders requestHeader, DriveFreqItemsRequest request);
+
+    Mono<ResponseEntity<Map<String, Object>>> getDocLibsAsync(HttpHeaders requestHeader, DocLibsRequest request);
+
+    Mono<ResponseEntity<Map<String, Object>>> getDrivesFilesChildrenAsync(HttpHeaders requestHeader, String driveId, String parentId, DriversFilesChildrenRequest request);
+
+    Mono<ResponseEntity<Map<String, Object>>> postDrivesFileRequestUploadAsync(HttpHeaders requestHeader, String driveId, String parentId, DrivesFilesRequestUploadRequest request);
 
 }

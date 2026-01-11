@@ -8,6 +8,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMvcConfiguration implements WebMvcConfigurer {
 
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addRedirectViewController("/", "/login/auth?scope=kso.file.readwrite,kso.doclib.read");
+        registry.addRedirectViewController("/", "/login/oauth2/auth?scope=kso.file.readwrite,kso.doclib.read");
     }
 }

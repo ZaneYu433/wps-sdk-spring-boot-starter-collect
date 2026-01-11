@@ -31,22 +31,27 @@ public class WebClientTemplate {
         return Mono.error(new WpsApiException(message));
     }
 
-    public <T> Mono<T> postFormAsync(String uri, Object formParams, HttpHeaders headers, ParameterizedTypeReference<T> responseType) {
-        return webClient.post().uri(uri).contentType(MediaType.APPLICATION_FORM_URLENCODED).bodyValue(formParams).headers(httpHeaders -> {
+    public <T> Mono<T> postAsync(String uri, MediaType mediaType, Object formParams, HttpHeaders headers, ParameterizedTypeReference<T> responseType) {
+        return webClient.post().uri(uri).contentType(mediaType).bodyValue(formParams).headers(httpHeaders -> {
             if (headers != null) {
                 httpHeaders.addAll(headers);
             }
         }).retrieve().onStatus(status -> !status.is2xxSuccessful(), clientResponse -> handleNon2xxResponse(clientResponse.statusCode())).bodyToMono(responseType);
     }
 
-    public <T> Mono<ResponseEntity<T>> postFormWithResponseEntityAsync(String uri, Object formParams, HttpHeaders headers, ParameterizedTypeReference<T> responseType) {
-        return this.postFormAsync(uri, formParams, headers, responseType).map(ResponseEntity::ok);
+    public <T> Mono<ResponseEntity<T>> postWithResponseEntityAsync(String uri, Object formParams, HttpHeaders headers, ParameterizedTypeReference<T> responseType) {
+        return this.postAsync(uri, MediaType.APPLICATION_FORM_URLENCODED, formParams, headers, responseType).map(ResponseEntity::ok);
+    }
+
+    public <T> Mono<ResponseEntity<T>> postWithResponseEntityAsync(String uri, MediaType mediaType, Object formParams, HttpHeaders headers, ParameterizedTypeReference<T> responseType) {
+        return this.postAsync(uri, mediaType, formParams, headers, responseType).map(ResponseEntity::ok);
     }
 
     private WebClient.RequestHeadersSpec<?> buildGetSpec(String uri, MultiValueMap<String, Object> params) {
         return webClient.get().uri(uriBuilder -> {
             UriBuilder b1 = uriBuilder.path(uri);
             params.forEach((k, v) -> b1.queryParamIfPresent(k, Optional.of(v)));
+            System.out.println(b1.build());
             return b1.build();
         });
     }

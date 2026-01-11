@@ -1,6 +1,6 @@
 package net.thewesthill.wpssdkspringbootstartertest;
 
-import net.thewesthill.wps.utils.KsoSign;
+import net.thewesthill.wps.KsoSign;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

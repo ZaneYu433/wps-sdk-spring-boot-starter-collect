@@ -21,19 +21,19 @@ public class LoginController {
 
     private final StandaloneAccessTokenClient standaloneBuilder;
 
-    private final UserAccessTokenClient userBuilder;
+    private final UserAccessTokenClient userClient;
 
     @GetMapping("/get-standalone-token")
     public ResponseEntity<Map<String, Object>> getStandaloneToken() {
         return standaloneBuilder.getWpsTokenSync(Oauth2TokenParam.buildStandaloneTokenRequest(GrantTypes.StandaloneClient));
     }
 
-    @GetMapping("/auth")
-    public ResponseEntity<Void> auth(@RequestParam(value = "redirect_uri", defaultValue = "http://localhost:8080/login/callback") String redirectUri,
-                                     @RequestParam("scope") String scope,
-                                     @RequestParam(value = "state", required = false) String state) {
+    @GetMapping("/oauth2/auth")
+    public ResponseEntity<Void> getOauth2Auth(@RequestParam(value = "redirect_uri", defaultValue = "http://localhost:8080/login/callback") String redirectUri,
+                                              @RequestParam("scope") String scope,
+                                              @RequestParam(value = "state", required = false) String state) {
         try {
-            String response = userBuilder.authSender(redirectUri, scope, state);
+            String response = userClient.getOauth2AuthSync(redirectUri, scope, state);
             return ResponseEntity.status(HttpStatus.FOUND)
                     .header("Location", response)
                     .build();
@@ -47,12 +47,12 @@ public class LoginController {
     @GetMapping("/callback")
     public ResponseEntity<Map<String, Object>> callback(@RequestParam("code") String code,
                                                         @RequestParam(value = "redirect_uri", defaultValue = "http://localhost:8080/login/callback") String redirectUri) {
-        return userBuilder.getWpsTokenSync(Oauth2TokenParam.buildUserClientTokenRequest(GrantTypes.UserClient, code, redirectUri));
+        return userClient.getWpsTokenSync(Oauth2TokenParam.buildUserClientTokenRequest(GrantTypes.UserClient, code, redirectUri));
     }
 
     @GetMapping("/refresh-user-token")
     public ResponseEntity<Map<String, Object>> refreshUserToken(@RequestParam("refresh_token") String refreshToken) {
-        return userBuilder.refreshTokenSync(Oauth2TokenParam.buildRefreshUserTokenRequest(GrantTypes.RefreshClient, refreshToken));
+        return userClient.refreshTokenSync(Oauth2TokenParam.buildRefreshUserTokenRequest(GrantTypes.RefreshClient, refreshToken));
     }
 
 }

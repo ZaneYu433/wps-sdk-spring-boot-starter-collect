@@ -30,7 +30,7 @@ public class StandaloneAccessTokenClient implements AccessTokenInterface {
             add("client_secret", properties.getClientSecret());
         }};
 
-        return webClientTemplate.postFormWithResponseEntityAsync(
+        return webClientTemplate.postWithResponseEntityAsync(
                 UrlConstants.WPS_TOKEN_URL,
                 params, null, webClientTemplate.getMapTypeReference()
         );

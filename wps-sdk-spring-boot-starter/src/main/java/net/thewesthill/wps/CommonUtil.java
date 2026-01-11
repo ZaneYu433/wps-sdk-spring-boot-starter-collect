@@ -1,4 +1,4 @@
-package net.thewesthill.wps.utils;
+package net.thewesthill.wps;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.LinkedMultiValueMap;

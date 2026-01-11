@@ -1,4 +1,4 @@
-package net.thewesthill.wps.model;
+package net.thewesthill.wps.model.doclibs;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
