@@ -1,24 +1,14 @@
 package net.thewesthill.wps.model;
 
 import lombok.Data;
+import lombok.Getter;
 
 @Data
+@Getter
 public class UploadFileRequest {
 
-    private Data data;
+    private String method;
 
-    @lombok.Data
-    public static class Data {
+    private String url;
 
-        private StoreRequest storeRequest;
-
-        private String uploadId;
-    }
-
-    public static class StoreRequest {
-
-        private String method;
-
-        private String url;
-    }
 }

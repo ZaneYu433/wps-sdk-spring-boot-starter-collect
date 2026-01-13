@@ -13,16 +13,16 @@ class WpsSdkSpringBootStarterTestApplicationTests {
 
     @Test
     void contextLoads() throws NoSuchAlgorithmException, InvalidKeyException {
-        final String accessKey = "Ak123456";
-        final String secretKey = "sk098765";
-        final String method = "POST";
-        final String uri = "/v7/test/body";
+        final String accessKey = "AK20260112LVMYCE";
+        final String secretKey = "f26560b2a21918744893dc32746d1e04";
+        final String method = "GET";
+        final String uri = "v7/users/current";
         final String contentType = "application/json";
-        final String contentDate = "Mon, 02 Jan 2006 15:04:05 GMT";
-        final byte[] requestBody = "{\"key\": \"value\"}".getBytes(StandardCharsets.UTF_8);
+        final String contentDate = "Tue, 13 Jan 2026 06:18:31 GMT";
+        final byte[] requestBody = "".getBytes(StandardCharsets.UTF_8);
 
         KsoSign kso = new KsoSign(accessKey, secretKey);
-        KsoSign.Out out = kso.ksoSign(method, uri, contentType, contentDate, requestBody);
+        KsoSign.Out out = kso.kso1Sign(method, uri, contentType, contentDate, requestBody);
         System.out.println(out.date());
         System.out.println(out.authorization());
     }

@@ -13,18 +13,16 @@ import java.security.NoSuchAlgorithmException;
 @Slf4j
 @AllArgsConstructor
 public class KsoSign {
-
     private final String accessKey;
-
     private final String secretKey;
 
-    public Out ksoSign(String method, String uri, String contentType, String ksoDate, byte[] requestBody) throws NoSuchAlgorithmException, InvalidKeyException {
+    public Out kso1Sign(String method, String uri, String contentType, String ksoDate, byte[] requestBody) throws NoSuchAlgorithmException, InvalidKeyException {
         String ksoSignature = getKso1Signature(method, uri, contentType, ksoDate, requestBody);
-        String authorization = String.format("KSO-1 %S:%S", accessKey, ksoSignature);
+        String authorization = String.format("KSO-1 %s:%s", accessKey, ksoSignature);
         return new Out(ksoDate, authorization);
     }
 
-    public String getKso1Signature(String method, String uri, String contentType, String ksoDate, byte[] requestBody) throws NoSuchAlgorithmException, InvalidKeyException {
+    private String getKso1Signature(String method, String uri, String contentType, String ksoDate, byte[] requestBody) throws NoSuchAlgorithmException, InvalidKeyException {
         String sha256Hex = "";
         if (requestBody != null && requestBody.length > 0) {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -32,12 +30,13 @@ public class KsoSign {
             sha256Hex = bytesToHex(hash);
         }
 
-        String dateToSign = "KSO-1 " + method + uri + contentType + ksoDate + sha256Hex;
-        log.info("DateToSign: {}", dateToSign);
+        System.out.println("sha256: " + sha256Hex);
+
+        String dataToSign = "KSO-1" + method + uri + contentType + ksoDate + sha256Hex;
         Mac mac = Mac.getInstance("HmacSHA256");
         SecretKeySpec secretKeySpec = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
         mac.init(secretKeySpec);
-        byte[] macBytes = mac.doFinal(dateToSign.getBytes(StandardCharsets.UTF_8));
+        byte[] macBytes = mac.doFinal(dataToSign.getBytes(StandardCharsets.UTF_8));
         return bytesToHex(macBytes);
     }
 
@@ -52,5 +51,4 @@ public class KsoSign {
     public record Out(String date, String authorization) {
 
     }
-
 }

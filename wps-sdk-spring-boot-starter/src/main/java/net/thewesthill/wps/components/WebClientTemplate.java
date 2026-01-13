@@ -1,6 +1,7 @@
 package net.thewesthill.wps.components;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import net.thewesthill.wps.WpsApiException;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
@@ -17,6 +18,7 @@ import reactor.core.publisher.Mono;
 import java.util.Map;
 import java.util.Optional;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class WebClientTemplate {
@@ -37,10 +39,6 @@ public class WebClientTemplate {
                 httpHeaders.addAll(headers);
             }
         }).retrieve().onStatus(status -> !status.is2xxSuccessful(), clientResponse -> handleNon2xxResponse(clientResponse.statusCode())).bodyToMono(responseType);
-    }
-
-    public <T> Mono<ResponseEntity<T>> postWithResponseEntityAsync(String uri, Object formParams, HttpHeaders headers, ParameterizedTypeReference<T> responseType) {
-        return this.postAsync(uri, MediaType.APPLICATION_FORM_URLENCODED, formParams, headers, responseType).map(ResponseEntity::ok);
     }
 
     public <T> Mono<ResponseEntity<T>> postWithResponseEntityAsync(String uri, MediaType mediaType, Object formParams, HttpHeaders headers, ParameterizedTypeReference<T> responseType) {
@@ -70,6 +68,18 @@ public class WebClientTemplate {
 
     public <T> Mono<ResponseEntity<T>> getWithResponseEntityAsync(String uri, MultiValueMap<String, Object> params, HttpHeaders headers, ParameterizedTypeReference<T> responseType) {
         return this.getAsync(uri, params, headers, responseType).map(ResponseEntity::ok);
+    }
+
+    public <T> Mono<T> putAsync(String uri, MediaType mediaType, Object params, HttpHeaders headers, ParameterizedTypeReference<T> responseType) {
+        return webClient.put().uri(uri).contentType(mediaType).bodyValue(params).headers(httpHeaders -> {
+            if (headers != null) {
+                httpHeaders.addAll(headers);
+            }
+        }).retrieve().onStatus(status -> !status.is2xxSuccessful(), clientResponse -> handleNon2xxResponse(clientResponse.statusCode())).bodyToMono(responseType);
+    }
+
+    public <T> Mono<ResponseEntity<T>> putWithResponseEntityAsync(String uri, MediaType mediaType, Object params, HttpHeaders headers, ParameterizedTypeReference<T> responseType) {
+        return this.putAsync(uri, mediaType, params, headers, responseType).map(ResponseEntity::ok);
     }
 
     public <T> T syncExecute(Mono<T> mono) {

@@ -5,7 +5,7 @@ public interface UrlConstants {
     /**
      * 授权认证接口地址
      */
-    String WPS_TOKEN_URL = "/oauth2/token";
+    String WPS_TOKEN_URL = "https://openapi.wps.cn/oauth2/token";
 
     /**
      * 授权跳转链接
@@ -55,5 +55,4 @@ final class UrlUtil {
     public static String DRIVERS_DRIVE_ID_FILES_PARENT_ID(String driveId, String parentId) {
         return String.format("/v7/drives/%s/files/%s", driveId, parentId);
     }
-
 }

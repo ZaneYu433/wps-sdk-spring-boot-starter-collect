@@ -1,17 +1,25 @@
 package net.thewesthill.wpssdkspringbootstartertest.controller;
 
+import io.netty.util.internal.StringUtil;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.thewesthill.wps.model.UploadFileRequest;
 import net.thewesthill.wps.model.doclibs.DocLibsRequest;
 import net.thewesthill.wps.model.drive_freq.items.DriveFreqItemsRequest;
 import net.thewesthill.wps.model.drivers.files.children.request.DriversFilesChildrenRequest;
 import net.thewesthill.wps.model.drives.files.request_upload.DrivesFilesRequestUploadRequest;
 import net.thewesthill.wps.service.impl.CloudDocClient;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 
 @Slf4j
@@ -66,8 +74,21 @@ public class CloudDocController {
         return client.postDrivesFileRequestUploadSync(requestHeader, driveId, parentId, request);
     }
 
-    @PutMapping("/to-object")
-    public ResponseEntity<Map<String, Object>> postToObject(@RequestHeader(value = "Authorization") String token) {
-        return ResponseEntity.ok(null);
+    @PostMapping(value = "/to-object")
+    public ResponseEntity<Map<String, Object>> postToObject(@RequestHeader(value = "Authorization") String token,
+                                                            @RequestParam("file") MultipartFile file,
+                                                            @ModelAttribute UploadFileRequest request) throws IOException {
+        String fileName = file.getOriginalFilename();
+        if (StringUtil.isNullOrEmpty(fileName)) {
+            return ResponseEntity.badRequest().body(Map.of("code", 400, "msg", "Please Check Valid FileName."));
+        }
+        // BackUp.
+        Path path = Paths.get("C:/Users/ZaneYu/Downloads");
+        Path targetPath = path.resolve(fileName);
+        File localBackupFile = targetPath.toFile();
+        file.transferTo(localBackupFile);
+        return client.postToObjectSync(new HttpHeaders() {{
+            add("Authorization", token);
+        }}, localBackupFile, request);
     }
 }

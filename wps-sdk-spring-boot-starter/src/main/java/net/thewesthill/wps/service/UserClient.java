@@ -29,10 +29,10 @@ public class UserClient {
     public Mono<ResponseEntity<Map<String, Object>>> getUserInfo(HttpHeaders headers) throws NoSuchAlgorithmException, InvalidKeyException {
         String rfcTime = CommonUtil.getRFC1123Date();
         KsoSign ksoSign = new KsoSign(properties.getClientId(), properties.getClientSecret());
-        KsoSign.Out out = ksoSign.ksoSign("GET", UrlConstants.USER_CURRENT_URL, MediaType.APPLICATION_JSON.toString(), rfcTime, "".getBytes(StandardCharsets.UTF_8));
+        KsoSign.Out out = ksoSign.kso1Sign("GET", UrlConstants.USER_CURRENT_URL, MediaType.APPLICATION_JSON.toString(), rfcTime, "".getBytes(StandardCharsets.UTF_8));
         headers.add("Content-Type", MediaType.APPLICATION_JSON.toString());
         headers.add("X-Kso-Date", rfcTime);
-        headers.add("X-Kso-Authorization", out.authorization());
+//        headers.add("X-Kso-Authorization", out.authorization());
         return webClientTemplate.getWithResponseEntityAsync(UrlConstants.USER_CURRENT_URL, new LinkedMultiValueMap<>(), headers, webClientTemplate.getMapTypeReference());
     }
 

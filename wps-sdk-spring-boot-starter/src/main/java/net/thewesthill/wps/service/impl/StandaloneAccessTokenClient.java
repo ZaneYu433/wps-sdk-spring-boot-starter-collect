@@ -6,6 +6,7 @@ import net.thewesthill.wps.contants.UrlConstants;
 import net.thewesthill.wps.properties.ClientCredentialsProperties;
 import net.thewesthill.wps.service.AccessTokenInterface;
 import net.thewesthill.wps.service.Oauth2TokenParam;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -31,7 +32,7 @@ public class StandaloneAccessTokenClient implements AccessTokenInterface {
         }};
 
         return webClientTemplate.postWithResponseEntityAsync(
-                UrlConstants.WPS_TOKEN_URL,
+                UrlConstants.WPS_TOKEN_URL, MediaType.APPLICATION_FORM_URLENCODED,
                 params, null, webClientTemplate.getMapTypeReference()
         );
     }

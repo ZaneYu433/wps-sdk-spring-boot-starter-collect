@@ -7,6 +7,7 @@ import net.thewesthill.wps.properties.ClientCredentialsProperties;
 import net.thewesthill.wps.service.AccessTokenInterface;
 import net.thewesthill.wps.service.Oauth2TokenParam;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -33,8 +34,8 @@ public class UserAccessTokenClient implements AccessTokenInterface {
             add("code", oauth2TokenRequest.getCode());
             add("redirect_uri", oauth2TokenRequest.getRedirectUri());
         }};
-
-        return webClientTemplate.postWithResponseEntityAsync(UrlConstants.WPS_TOKEN_URL, params, null, webClientTemplate.getMapTypeReference());
+        System.out.println(UrlConstants.WPS_TOKEN_URL);
+        return webClientTemplate.postWithResponseEntityAsync(UrlConstants.WPS_TOKEN_URL, MediaType.APPLICATION_FORM_URLENCODED, params, null, webClientTemplate.getMapTypeReference());
     }
 
     @Override
@@ -69,7 +70,7 @@ public class UserAccessTokenClient implements AccessTokenInterface {
             add("client_secret", properties.getClientSecret());
         }};
 
-        return webClientTemplate.postWithResponseEntityAsync(UrlConstants.WPS_TOKEN_URL, params, null, webClientTemplate.getMapTypeReference());
+        return webClientTemplate.postWithResponseEntityAsync(UrlConstants.WPS_TOKEN_URL, MediaType.APPLICATION_FORM_URLENCODED, params, null, webClientTemplate.getMapTypeReference());
     }
 
     public ResponseEntity<Map<String, Object>> refreshTokenSync(Oauth2TokenParam oauth2TokenRequest) {
