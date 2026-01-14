@@ -8,10 +8,10 @@ import net.thewesthill.wps.model.UploadFileRequest;
 import net.thewesthill.wps.model.doclibs.DocLibsRequest;
 import net.thewesthill.wps.model.drive_freq.items.DriveFreqItemsRequest;
 import net.thewesthill.wps.model.drivers.files.children.request.DriversFilesChildrenRequest;
+import net.thewesthill.wps.model.drives.files.commit_upload.DriversFilesCommitUploadRequest;
 import net.thewesthill.wps.model.drives.files.request_upload.DrivesFilesRequestUploadRequest;
 import net.thewesthill.wps.service.impl.CloudDocClient;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -74,21 +74,34 @@ public class CloudDocController {
         return client.postDrivesFileRequestUploadSync(requestHeader, driveId, parentId, request);
     }
 
-    @PostMapping(value = "/to-object")
-    public ResponseEntity<Map<String, Object>> postToObject(@RequestHeader(value = "Authorization") String token,
-                                                            @RequestParam("file") MultipartFile file,
-                                                            @ModelAttribute UploadFileRequest request) throws IOException {
+    @PostMapping("/to-object")
+    public ResponseEntity<Map<String, Object>> putToObject(@RequestHeader(value = "Authorization") String token,
+                                                           @RequestParam("file") MultipartFile file,
+                                                           @ModelAttribute UploadFileRequest request) throws IOException {
         String fileName = file.getOriginalFilename();
         if (StringUtil.isNullOrEmpty(fileName)) {
             return ResponseEntity.badRequest().body(Map.of("code", 400, "msg", "Please Check Valid FileName."));
         }
         // BackUp.
-        Path path = Paths.get("C:/Users/ZaneYu/Downloads");
+        Path path = Paths.get(System.getProperty("user.home") + "/Downloads");
         Path targetPath = path.resolve(fileName);
         File localBackupFile = targetPath.toFile();
         file.transferTo(localBackupFile);
-        return client.postToObjectSync(new HttpHeaders() {{
+        return client.putToObjectSync(new HttpHeaders() {{
             add("Authorization", token);
         }}, localBackupFile, request);
+    }
+
+    @PostMapping("/drives/{drive_id}/files/{parent_id}/commit_upload")
+    public ResponseEntity<Map<String, Object>> postDriversFilesCommitUpload(@RequestHeader(value = "Authorization") String token,
+                                                                            @RequestHeader(value = "X-Kso-Id-Type", required = false) String type,
+                                                                            @PathVariable(value = "drive_id") String driveId,
+                                                                            @PathVariable(value = "parent_id") String parentId,
+                                                                            @RequestBody DriversFilesCommitUploadRequest request) {
+        HttpHeaders requestHeader = new HttpHeaders() {{
+            add("Authorization", token);
+            add("X-Kso-Id-Type", type);
+        }};
+        return client.postDriversFilesCommitUploadSync(requestHeader, driveId, parentId, request);
     }
 }

@@ -25,6 +25,9 @@ class WpsSdkSpringBootStarterTestApplicationTests {
         KsoSign.Out out = kso.kso1Sign(method, uri, contentType, contentDate, requestBody);
         System.out.println(out.date());
         System.out.println(out.authorization());
+
+        String userHome = System.getProperty("user.home");
+        System.out.println("用户主目录路径: " + userHome);
     }
 
 }

@@ -30,7 +30,7 @@ public class KsoSign {
             sha256Hex = bytesToHex(hash);
         }
 
-        System.out.println("sha256: " + sha256Hex);
+        log.info("sha256: {}", sha256Hex);
 
         String dataToSign = "KSO-1" + method + uri + contentType + ksoDate + sha256Hex;
         Mac mac = Mac.getInstance("HmacSHA256");

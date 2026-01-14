@@ -41,6 +41,10 @@ public interface UrlConstants {
     static String DRIVERS_DRIVE_ID_FILES_PARENT_ID_REQUEST_UPLOAD(String driveId, String parentId) {
         return String.format("%s/request_upload", UrlUtil.DRIVERS_DRIVE_ID_FILES_PARENT_ID(driveId, parentId));
     }
+
+    static String DRIVERS_DRIVE_ID_FILES_PARENT_ID_COMMIT_UPLOAD(String driveId, String parentId) {
+        return String.format("%s/commit_upload", UrlUtil.DRIVERS_DRIVE_ID_FILES_PARENT_ID(driveId, parentId));
+    }
 }
 
 final class UrlUtil {

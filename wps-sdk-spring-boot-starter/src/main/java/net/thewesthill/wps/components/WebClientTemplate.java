@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import net.thewesthill.wps.WpsApiException;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -25,8 +24,8 @@ public class WebClientTemplate {
 
     private final WebClient webClient;
 
-    public Mono<? extends Throwable> handleNon2xxResponse(HttpStatusCode statusCode) {
-        return Mono.error(new WpsApiException("WebClient Request Failed, Status Code: " + statusCode));
+    public Mono<? extends Throwable> handleNon2xxResponse(ClientResponse response) {
+        return Mono.error(new WpsApiException("WebClient Request Failed, Status Code: " + response.statusCode()));
     }
 
     public Mono<ResponseEntity<Map<String, Object>>> handleHeaderResponse(String message) {
@@ -38,7 +37,7 @@ public class WebClientTemplate {
             if (headers != null) {
                 httpHeaders.addAll(headers);
             }
-        }).retrieve().onStatus(status -> !status.is2xxSuccessful(), clientResponse -> handleNon2xxResponse(clientResponse.statusCode())).bodyToMono(responseType);
+        }).retrieve().onStatus(status -> !status.is2xxSuccessful(), this::handleNon2xxResponse).bodyToMono(responseType);
     }
 
     public <T> Mono<ResponseEntity<T>> postWithResponseEntityAsync(String uri, MediaType mediaType, Object formParams, HttpHeaders headers, ParameterizedTypeReference<T> responseType) {
@@ -63,7 +62,7 @@ public class WebClientTemplate {
             if (headers != null) {
                 httpHeaders.addAll(headers);
             }
-        }).retrieve().onStatus(status -> !status.is2xxSuccessful(), clientResponse -> handleNon2xxResponse(clientResponse.statusCode())).bodyToMono(responseType);
+        }).retrieve().onStatus(status -> !status.is2xxSuccessful(), this::handleNon2xxResponse).bodyToMono(responseType);
     }
 
     public <T> Mono<ResponseEntity<T>> getWithResponseEntityAsync(String uri, MultiValueMap<String, Object> params, HttpHeaders headers, ParameterizedTypeReference<T> responseType) {
@@ -75,7 +74,7 @@ public class WebClientTemplate {
             if (headers != null) {
                 httpHeaders.addAll(headers);
             }
-        }).retrieve().onStatus(status -> !status.is2xxSuccessful(), clientResponse -> handleNon2xxResponse(clientResponse.statusCode())).bodyToMono(responseType);
+        }).retrieve().onStatus(status -> !status.is2xxSuccessful(), this::handleNon2xxResponse).bodyToMono(responseType);
     }
 
     public <T> Mono<ResponseEntity<T>> putWithResponseEntityAsync(String uri, MediaType mediaType, Object params, HttpHeaders headers, ParameterizedTypeReference<T> responseType) {
