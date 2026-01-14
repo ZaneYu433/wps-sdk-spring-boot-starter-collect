@@ -48,7 +48,6 @@ public class WebClientTemplate {
         return webClient.get().uri(uriBuilder -> {
             UriBuilder b1 = uriBuilder.path(uri);
             params.forEach((k, v) -> b1.queryParamIfPresent(k, Optional.of(v)));
-            System.out.println(b1.build());
             return b1.build();
         });
     }

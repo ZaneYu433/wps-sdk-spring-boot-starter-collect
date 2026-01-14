@@ -1,4 +1,4 @@
-package net.thewesthill.wps.annotations;
+package net.thewesthill.wps;
 
 import net.thewesthill.wps.configs.WpsSdkAutoConfiguration;
 import org.springframework.context.annotation.Import;

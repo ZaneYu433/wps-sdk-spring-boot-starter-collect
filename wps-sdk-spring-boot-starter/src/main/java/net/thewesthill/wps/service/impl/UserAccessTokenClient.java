@@ -1,6 +1,7 @@
 package net.thewesthill.wps.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import net.thewesthill.wps.KsoSignEnhance;
 import net.thewesthill.wps.components.WebClientTemplate;
 import net.thewesthill.wps.contants.UrlConstants;
 import net.thewesthill.wps.properties.ClientCredentialsProperties;
@@ -38,6 +39,7 @@ public class UserAccessTokenClient implements AccessTokenInterface {
         return webClientTemplate.postWithResponseEntityAsync(UrlConstants.WPS_TOKEN_URL, MediaType.APPLICATION_FORM_URLENCODED, params, null, webClientTemplate.getMapTypeReference());
     }
 
+    @KsoSignEnhance
     @Override
     public ResponseEntity<Map<String, Object>> getWpsTokenSync(Oauth2TokenParam oauth2TokenRequest) {
         return webClientTemplate.syncExecute(getWpsTokenAsync(oauth2TokenRequest));
